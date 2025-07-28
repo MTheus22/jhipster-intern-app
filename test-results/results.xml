@@ -1,0 +1,6 @@
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="4.436418">
+<testsuite name="e2e/features/pessoa.feature.spec.js" timestamp="2025-07-27T23:53:56.978Z" hostname="" tests="1" failures="0" skipped="0" time="3.514" errors="0">
+<testcase name="Gerenciamento de Pessoas › Criar uma nova pessoa física com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="3.514">
+</testcase>
+</testsuite>
+</testsuites>

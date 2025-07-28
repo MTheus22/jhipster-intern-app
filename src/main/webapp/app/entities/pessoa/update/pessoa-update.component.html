@@ -126,7 +126,7 @@
             data-cy="tipoSanguineo"
           >
             <option [ngValue]="null"></option>
-            <option *ngFor="let tipoSanguineo of tipoSanguineoValues" [value]="tipoSanguineo">tipoSanguineo</option>
+            <option *ngFor="let tipoSanguineo of tipoSanguineoValues" [value]="tipoSanguineo">{{ tipoSanguineo }}</option>
           </select>
         </div>
 
@@ -145,7 +145,7 @@
             data-cy="sexoBiologicoAoNascer"
           >
             <option [ngValue]="null"></option>
-            <option *ngFor="let sexo of sexoValues" [value]="sexo">sexo</option>
+            <option *ngFor="let sexo of sexoValues" [value]="sexo">{{ sexo }}</option>
           </select>
         </div>
 
@@ -153,7 +153,7 @@
           <label class="form-control-label" for="field_tipoPessoa" ngbTooltip="default PF">Tipo Pessoa</label>
           <select class="form-control" name="tipoPessoa" formControlName="tipoPessoa" id="field_tipoPessoa" data-cy="tipoPessoa">
             <option [ngValue]="null"></option>
-            <option *ngFor="let tipoPessoa of tipoPessoaValues" [value]="tipoPessoa">tipoPessoa</option>
+            <option *ngFor="let tipoPessoa of tipoPessoaValues" [value]="tipoPessoa">{{ tipoPessoa }}</option>
           </select>
           <div *ngIf="editForm.get('tipoPessoa')!.invalid && (editForm.get('tipoPessoa')!.dirty || editForm.get('tipoPessoa')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('tipoPessoa')?.errors?.required"> This field is required. </small>
@@ -189,7 +189,7 @@
           <label class="form-control-label" for="field_estadoCivil">Estado Civil</label>
           <select class="form-control" name="estadoCivil" formControlName="estadoCivil" id="field_estadoCivil" data-cy="estadoCivil">
             <option [ngValue]="null"></option>
-            <option *ngFor="let estadoCivil of estadoCivilValues" [value]="estadoCivil">estadoCivil</option>
+            <option *ngFor="let estadoCivil of estadoCivilValues" [value]="estadoCivil">{{ estadoCivil }}</option>
           </select>
         </div>
 
