@@ -1,6 +1,100 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="4.436418">
-<testsuite name="e2e/features/pessoa.feature.spec.js" timestamp="2025-07-27T23:53:56.978Z" hostname="" tests="1" failures="0" skipped="0" time="3.514" errors="0">
-<testcase name="Gerenciamento de Pessoas › Criar uma nova pessoa física com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="3.514">
+<testsuites id="" name="" tests="6" failures="0" skipped="0" errors="0" time="31.905119">
+<testsuite name="e2e/features/pessoa.feature.spec.js" timestamp="2025-07-31T22:21:29.444Z" hostname="" tests="6" failures="0" skipped="0" time="30.741" errors="0">
+<testcase name="Gerenciamento de Pessoas › Criar uma nova pessoa física com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="6.341">
+<system-out>
+<![CDATA[Clicando no botão: Create a new Pessoa
+Preenchendo campo "Nome" com valor "Ana Silva"
+Preenchendo campo "Tipo Pessoa" com valor "PF"
+CPF gerado no formulário: 96426419846
+Preenchendo campo "Cpf" com valor "96426419846"
+Clicando no botão: Save
+Resposta da API após Save: 201
+Verificando se pessoa "Ana Silva" com CPF "96426419846" foi criada com sucesso
+✓ Pessoa criada com sucesso e lista carregada
+]]>
+</system-out>
+</testcase>
+<testcase name="Gerenciamento de Pessoas › Criar uma nova pessoa jurídica com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="4.075">
+<system-out>
+<![CDATA[Clicando no botão: Create a new Pessoa
+Preenchendo campo "Nome" com valor "Empresa Fantasia XYZ"
+Preenchendo campo "Tipo Pessoa" com valor "PJ"
+CNPJ gerado no formulário: 33049535886290
+Preenchendo campo "Cnpj" com valor "33049535886290"
+Clicando no botão: Save
+Resposta da API após Save: 201
+Verificando se pessoa "Empresa Fantasia XYZ" com CNPJ "33049535886290" foi criada com sucesso
+✓ Pessoa criada com sucesso e lista carregada
+]]>
+</system-out>
+</testcase>
+<testcase name="Gerenciamento de Pessoas › Tentar criar uma pessoa sem o campo &quot;Nome&quot;" classname="e2e/features/pessoa.feature.spec.js" time="2.86">
+<system-out>
+<![CDATA[Clicando no botão: Create a new Pessoa
+Preenchendo campo "Tipo Pessoa" com valor "PF"
+CPF gerado no formulário: 60588224048
+Preenchendo campo "Cpf" com valor "60588224048"
+]]>
+</system-out>
+</testcase>
+<testcase name="Gerenciamento de Pessoas › Visualizar os detalhes de uma pessoa existente" classname="e2e/features/pessoa.feature.spec.js" time="4.664">
+<system-out>
+<![CDATA[CPF gerado para o teste: 56069249778
+Dados da pessoa a serem enviados: {
+  nome: [32m'Bruno para Visualização'[39m,
+  tipoPessoa: [32m'PF'[39m,
+  cpf: [32m'56069249778'[39m,
+  nomeMae: [32m'Maria da Visualização'[39m,
+  dataRegistro: [32m'2025-07-31T22:21:45.538Z'[39m
+}
+Pessoa criada com ID: 1353
+Procurando linha com CPF/CNPJ: "56069249778"
+Linha encontrada na primeira página
+]]>
+</system-out>
+</testcase>
+<testcase name="Gerenciamento de Pessoas › Editar uma pessoa existente com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="6.462">
+<system-out>
+<![CDATA[CPF gerado para o teste: 34427341922
+Dados da pessoa a serem enviados: {
+  nome: [32m'Carlos a ser Editado'[39m,
+  tipoPessoa: [32m'PF'[39m,
+  cpf: [32m'34427341922'[39m,
+  dataRegistro: [32m'2025-07-31T22:21:50.078Z'[39m
+}
+Pessoa criada com ID: 1354
+Procurando botão de edição para linha com CPF "34427341922"
+Procurando linha com CPF/CNPJ: "34427341922"
+Linha encontrada na primeira página
+Preenchendo campo "Nome" com valor "Carlos Editado com Sucesso"
+Clicando no botão: Save
+Resposta da API após Save: 200
+Verificando se pessoa "Carlos Editado com Sucesso" com CPF "34427341922" foi criada com sucesso
+✓ Pessoa criada com sucesso e lista carregada
+Verificando se a linha com nome "Carlos a ser Editado" não existe na tabela
+✓ Confirmado que a linha com nome "Carlos a ser Editado" não existe
+]]>
+</system-out>
+</testcase>
+<testcase name="Gerenciamento de Pessoas › Excluir uma pessoa existente com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="6.339">
+<system-out>
+<![CDATA[CPF gerado para o teste: 93144994389
+Dados da pessoa a serem enviados: {
+  nome: [32m'Joana a ser Excluída'[39m,
+  tipoPessoa: [32m'PF'[39m,
+  cpf: [32m'93144994389'[39m,
+  dataRegistro: [32m'2025-07-31T22:21:56.385Z'[39m
+}
+Pessoa criada com ID: 1355
+Procurando botão de exclusão para linha com CPF "93144994389"
+Procurando linha com CPF/CNPJ: "93144994389"
+Linha encontrada na primeira página
+Clicando no botão de confirmação "Delete" no modal
+Resposta da API após exclusão: 204
+Verificando se a linha com nome "Joana a ser Excluída" não existe na tabela
+✓ Confirmado que a linha com nome "Joana a ser Excluída" não existe
+]]>
+</system-out>
 </testcase>
 </testsuite>
 </testsuites>
