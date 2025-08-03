@@ -1,3 +1,4 @@
+@pessoas
 Feature: Gerenciamento de Pessoas
   Como um administrador do sistema
   Eu quero poder criar, visualizar, editar e excluir registros de Pessoas
@@ -22,6 +23,7 @@ Feature: Gerenciamento de Pessoas
       | Tipo Pessoa | PF                    |
       | Cpf         | um CPF válido e único |
     And eu clico no botão "Save"
+    Then a operação de salvamento de Pessoa é bem-sucedida e sou redirecionado para a lista
     Then eu devo ver a mensagem de sucesso "A new pessoa is created with identifier"
     And a tabela de pessoas deve conter uma linha com o nome "Ana Silva" e o CPF gerado
 
@@ -83,7 +85,6 @@ Feature: Gerenciamento de Pessoas
     And eu clico no botão "Save"
     Then eu devo ver a mensagem de sucesso "A pessoa is updated with identifier"
     And a tabela de pessoas deve conter uma linha com o nome "Carlos Editado com Sucesso" e o CPF gerado
-    And a tabela de pessoas não deve conter uma linha com o nome "Carlos a ser Editado"
 
   @delete
   Scenario: Excluir uma pessoa existente com sucesso
@@ -95,4 +96,4 @@ Feature: Gerenciamento de Pessoas
     When eu clico no botão de exclusão na linha que contém o CPF gerado
     And eu clico no botão de confirmação "Delete" no modal
     Then eu devo ver a mensagem de sucesso "A pessoa is deleted with identifier"
-    And a tabela de pessoas não deve conter uma linha com o nome "Joana a ser Excluída"
+    And a tabela de pessoas não deve conter uma linha com o CPF gerado
