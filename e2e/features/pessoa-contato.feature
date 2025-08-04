@@ -37,7 +37,7 @@ Feature: Gerenciamento de Contatos de Pessoas
     And eu preencho o campo "Descricao" com o valor "Contato Editado com Sucesso"
     And eu clico no botão "Save"
     Then eu devo ver a mensagem de sucesso "A pessoaContato is updated with identifier"
-    And a tabela de contatos de pessoa deve conter uma linha com o ID único a descrição "Contato Editado com Sucesso"
+    And a tabela de contatos de pessoa deve conter uma linha com o ID único e a descrição "Contato Editado com Sucesso"
 
   @delete
   Scenario: Excluir um contato de pessoa existente com sucesso

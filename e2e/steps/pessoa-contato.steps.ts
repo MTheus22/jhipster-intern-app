@@ -217,46 +217,6 @@ When('eu marco o checkbox {string}', async ({ page }, checkboxName: string) => {
   await page.locator(fieldConfig.selector).check();
 });
 
-
-/**
- * Clica no botão de visualização da linha da tabela que contém a descrição gerada no contexto.
- */
-When('eu clico no botão de visualização na linha que contém a descrição gerada', async ({ page, ctx }) => {
-  if (!ctx.generatedDescription) {
-    throw new Error('A descrição gerada não foi encontrada no contexto do teste (ctx).');
-  }
-  await sortByHighestID(page);
-  const targetRow = page.locator('tbody tr', { hasText: ctx.generatedDescription });
-  await targetRow.locator('[data-cy="entityDetailsButton"]').click();
-});
-
-
-/**
- * Clica no botão de edição da linha da tabela que contém a descrição gerada no contexto.
- */
-When('eu clico no botão de edição na linha que contém a descrição gerada', async ({ page, ctx }) => {
-  if (!ctx.generatedDescription) {
-    throw new Error('A descrição gerada não foi encontrada no contexto do teste (ctx).');
-  }
-  await sortByHighestID(page);
-  const targetRow = page.locator('tbody tr', { hasText: ctx.generatedDescription });
-  await targetRow.locator('[data-cy="entityEditButton"]').click();
-  await expect(page.locator('[data-cy="entityCreateSaveButton"]')).toBeVisible({ timeout: 10000 });
-});
-
-/**
- * Clica no botão de exclusão da linha da tabela que contém a descrição gerada no contexto.
- */
-When('eu clico no botão de exclusão na linha que contém a descrição gerada', async ({ page, ctx }) => {
-  if (!ctx.generatedDescription) {
-    throw new Error('A descrição gerada não foi encontrada no contexto do teste (ctx).');
-  }
-  await sortByHighestID(page);
-  const targetRow = page.locator('tbody tr', { hasText: ctx.generatedDescription });
-  await targetRow.locator('[data-cy="entityDeleteButton"]').click();
-  await expect(page.locator('#jhi-delete-pessoaContato-heading')).toBeVisible();
-});
-
 /**
  * Clica no botão de exclusão da linha da tabela que contém a descrição e ID específicos.
  * @param {string} descricao - A descrição do contato a ser excluído.
@@ -277,16 +237,6 @@ When('eu clico no botão de exclusão na linha que contém a descrição {string
   await expect(page.locator('#jhi-delete-pessoaContato-heading')).toBeVisible();
 });
 
-/**
- * Clica no botão de confirmação no modal de exclusão e espera a resposta da API.
- * @param {string} buttonText - O texto do botão de confirmação (ex: "Delete").
- */
-When('eu clico no botão de confirmação {string} no modal de contato', async ({ page }, buttonText: string) => {
-  await Promise.all([
-    page.waitForResponse(resp => resp.url().includes('/api/pessoa-contatoes') && resp.status() === 204, { timeout: 10000 }),
-    page.locator('[data-cy="entityConfirmDeleteButton"]').click(),
-  ]);
-});
 
 // --- STEPS: THEN (ENTÃO) ---
 // Verificam os resultados e fazem as asserções finais.
@@ -317,68 +267,12 @@ Then('a tabela de contatos de pessoa deve conter uma linha com a descrição ger
   await expect(targetRow.getByRole('cell', { name: ctx.generatedDescription })).toBeVisible();
 });
 
-/**
- * Verifica se um campo específico do formulário de contato está desabilitado.
- * @param {string} fieldName - O nome do campo, conforme mapeado em PESSOA_CONTATO_FIELD_SELECTORS.
- */
-Then('o campo de contato {string} deve estar desabilitado', async ({ page }, fieldName: string) => {
-  const fieldConfig = PESSOA_CONTATO_FIELD_SELECTORS[fieldName];
-  if (!fieldConfig) {
-    throw new Error(`Seletor não definido para o campo "${fieldName}".`);
-  }
-  await expect(page.locator(fieldConfig.selector)).toBeDisabled();
-});
-
-/**
- * Verifica se uma mensagem de erro de validação está visível para um campo específico de contato.
- * @param {string} errorMessage - A mensagem de erro exata esperada.
- * @param {string} fieldName - O nome do campo associado ao erro.
- */
-Then('eu devo ver a mensagem de erro {string} para o campo de contato {string}', async ({ page }, errorMessage: string, fieldName: string) => {
-  const fieldConfig = PESSOA_CONTATO_FIELD_SELECTORS[fieldName];
-  if (!fieldConfig) {
-    throw new Error(`Seletor não definido para o campo "${fieldName}".`);
-  }
-  const fieldContainer = page.locator('.form-group', { has: page.locator(fieldConfig.selector) });
-  await expect(fieldContainer.getByText(errorMessage, { exact: true })).toBeVisible();
-});
-
-/**
- * Verifica se a navegação para a página de detalhes do contato foi bem-sucedida.
- */
-Then('eu devo estar na página de detalhes do contato de pessoa', async ({ page }) => {
-  await expect(page.locator('[data-cy="pessoaContatoDetailsHeading"]')).toBeVisible();
-});
-
-/**
- * Na página de detalhes de contato, verifica se um campo exibe o valor esperado.
- * @param {string} fieldLabel - O rótulo do campo de detalhe (ex: "Descricao", "Telefone Numero Completo").
- * @param {string} expectedValue - O valor esperado associado ao rótulo.
- */
-Then('eu devo ver o detalhe de contato {string} com o valor {string}', async ({ page }, fieldLabel: string, expectedValue: string) => {
-  const detailTerm = page.locator(`dt`).filter({ hasText: new RegExp(`^${fieldLabel}$`) });
-  const detailValue = detailTerm.locator('+ dd').first();
-  await expect(detailValue).toHaveText(expectedValue);
-});
-
-/**
- * Verifica se a operação de salvamento foi bem-sucedida e houve redirecionamento para a lista de contatos.
- */
-Then('a operação de salvamento de Pessoa Contato é bem-sucedida e sou redirecionado para a lista', async ({ page }) => {
-  await page.waitForResponse(
-    resp => resp.url().includes('/api/pessoa-contatoes') && (resp.status() === 200 || resp.status() === 201),
-    { timeout: 10000 }
-  );
-  const refreshButton = page.getByRole('button', { name: 'Refresh List' });
-  await expect(refreshButton).toBeEnabled({ timeout: 10000 });
-  await page.waitForURL('**/pessoa-contato', { timeout: 10000 });
-});
 
 /**
  * Verifica se a tabela de contatos de pessoa contém uma linha com o ID único e a descrição especificada.
  * @param {string} description - A descrição esperada na linha da tabela.
  */
-Then('a tabela de contatos de pessoa deve conter uma linha com o ID único a descrição {string}', async ({ page, ctx }, description: string) => {
+Then('a tabela de contatos de pessoa deve conter uma linha com o ID único e a descrição {string}', async ({ page, ctx }, description: string) => {
   if (!ctx.createdPessoaContatoId) {
     throw new Error('O ID do contato de teste não foi encontrado no contexto. Verifique se o step Given foi executado.');
   }
@@ -391,51 +285,6 @@ Then('a tabela de contatos de pessoa deve conter uma linha com o ID único a des
   });
   
   await expect(targetRow.getByRole('cell', { name: description })).toBeVisible();
-});
-
-/**
- * Verifica se a tabela de contatos NÃO contém uma linha com a descrição especificada.
- * @param {string} description - A descrição que não deve estar presente na tabela.
- */
-Then('a tabela de contatos de pessoa não deve conter uma linha com a descrição {string}', async ({ page }, description: string) => {
-  const descriptionCell = page.getByRole('cell', { name: description, exact: true });
-  await expect(descriptionCell).not.toBeVisible();
-});
-
-/**
- * Verifica se a tabela de contatos NÃO contém uma linha com a descrição gerada no contexto.
- */
-Then('a tabela de contatos de pessoa não deve conter uma linha com a descrição gerada', async ({ page, ctx }) => {
-  if (!ctx.generatedDescription) {
-    throw new Error('A descrição gerada não foi encontrada no contexto do teste (ctx).');
-  }
-  await sortByHighestID(page);
-  const targetRow = page.locator('tbody tr', { hasText: ctx.generatedDescription });
-  await expect(targetRow).not.toBeVisible();
-});
-
-/**
- * Verifica se um checkbox específico está marcado.
- * @param {string} checkboxName - O nome do checkbox a ser verificado.
- */
-Then('o checkbox {string} deve estar marcado', async ({ page }, checkboxName: string) => {
-  const fieldConfig = PESSOA_CONTATO_FIELD_SELECTORS[checkboxName];
-  if (!fieldConfig || fieldConfig.type !== 'checkbox') {
-    throw new Error(`Seletor de checkbox não definido para "${checkboxName}".`);
-  }
-  await expect(page.locator(fieldConfig.selector)).toBeChecked();
-});
-
-/**
- * Verifica se um checkbox específico não está marcado.
- * @param {string} checkboxName - O nome do checkbox a ser verificado.
- */
-Then('o checkbox {string} não deve estar marcado', async ({ page }, checkboxName: string) => {
-  const fieldConfig = PESSOA_CONTATO_FIELD_SELECTORS[checkboxName];
-  if (!fieldConfig || fieldConfig.type !== 'checkbox') {
-    throw new Error(`Seletor de checkbox não definido para "${checkboxName}".`);
-  }
-  await expect(page.locator(fieldConfig.selector)).not.toBeChecked();
 });
 
 /**
