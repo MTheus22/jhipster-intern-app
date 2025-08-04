@@ -1,12 +1,6 @@
-<testsuites id="" name="" tests="4" failures="1" skipped="0" errors="0" time="15.263698">
-<testsuite name="e2e/features/pessoa-contato.feature.spec.js" timestamp="2025-08-04T11:32:46.119Z" hostname="" tests="4" failures="1" skipped="0" time="13.436" errors="0">
-<testcase name="Gerenciamento de Contatos de Pessoas › Criar um novo contato do tipo telefone para uma pessoa" classname="e2e/features/pessoa-contato.feature.spec.js" time="2.349">
-</testcase>
-<testcase name="Gerenciamento de Contatos de Pessoas › Editar um contato de pessoa existente com sucesso" classname="e2e/features/pessoa-contato.feature.spec.js" time="2.518">
-</testcase>
-<testcase name="Gerenciamento de Contatos de Pessoas › Excluir um contato de pessoa existente com sucesso" classname="e2e/features/pessoa-contato.feature.spec.js" time="2.29">
-</testcase>
-<testcase name="Gerenciamento de Contatos de Pessoas › Tentar criar um contato sem selecionar uma Pessoa" classname="e2e/features/pessoa-contato.feature.spec.js" time="6.279">
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="7.621611999999999">
+<testsuite name="e2e/features/pessoa-contato.feature.spec.js" timestamp="2025-08-04T11:44:20.352Z" hostname="" tests="1" failures="1" skipped="0" time="6.603" errors="0">
+<testcase name="Gerenciamento de Contatos de Pessoas › Tentar criar um contato sem selecionar uma Pessoa" classname="e2e/features/pessoa-contato.feature.spec.js" time="6.603">
 <failure message="pessoa-contato.feature.spec.js:40:7 Tentar criar um contato sem selecionar uma Pessoa" type="FAILURE">
 <![CDATA[  e2e/features/pessoa-contato.feature.spec.js:40:7 › Gerenciamento de Contatos de Pessoas › Tentar criar um contato sem selecionar uma Pessoa @pessoascontato @validation › Then o botão "Save" deve estar desabilitado 
 
