@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -27,5 +28,5 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
      * @return optional da pessoa se estiver ativa
      */
     @Query("SELECT p FROM Pessoa p WHERE p.id = :id AND p.dataExclusao IS NULL")
-    Optional<Pessoa> findActiveById(Long id);
+    Optional<Pessoa> findActiveById(@Param("id") Long id);
 }

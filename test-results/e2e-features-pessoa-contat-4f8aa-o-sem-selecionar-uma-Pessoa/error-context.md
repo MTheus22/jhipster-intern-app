@@ -32,6 +32,8 @@
   - textbox "Contato Digital Ident"
   - text: Telefone Numero Completo
   - textbox "Telefone Numero Completo"
+  - text: Telefone Ddi
+  - textbox "Telefone Ddi"
   - text: Telefone Ddd
   - spinbutton "Telefone Ddd"
   - text: Telefone Numero
@@ -57,16 +59,15 @@
     - option "8"
     - option "9"
     - option "10"
-    - option "1558"
-    - option "1559"
-    - option "1560"
-    - option "1606"
-    - option "1607"
-    - option "1608"
-    - option "1616"
-    - option "1618"
-    - option "1619"
-    - option "1627"
+    - option "1412"
+    - option "1413"
+    - option "1414"
+    - option "1415"
+    - option "1416"
+    - option "1417"
+    - option "1418"
+    - option "1419"
+    - option "1420"
   - button "Cancel"
   - button "Save"
 - paragraph: This is your footer

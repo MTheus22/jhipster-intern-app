@@ -17,6 +17,7 @@ import { TipoSanguineo } from 'app/entities/enumerations/tipo-sanguineo.model';
 import { Sexo } from 'app/entities/enumerations/sexo.model';
 import { TipoPessoa } from 'app/entities/enumerations/tipo-pessoa.model';
 import { EstadoCivil } from 'app/entities/enumerations/estado-civil.model';
+import { FormatCpfPipe } from 'app/shared/format/format-cpf.pipe';
 
 @Component({
   selector: 'jhi-pessoa-update',
@@ -57,7 +58,8 @@ export class PessoaUpdateComponent implements OnInit {
     protected eventManager: EventManager,
     protected pessoaService: PessoaService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    private formatCpfPipe: FormatCpfPipe
   ) {}
 
   ngOnInit(): void {
@@ -133,7 +135,7 @@ export class PessoaUpdateComponent implements OnInit {
       tipoSanguineo: pessoa.tipoSanguineo,
       sexoBiologicoAoNascer: pessoa.sexoBiologicoAoNascer,
       tipoPessoa: pessoa.tipoPessoa,
-      cpf: pessoa.cpf,
+      cpf: this.formatCpfPipe.transform(pessoa.cpf),
       cnpj: pessoa.cnpj,
       rg: pessoa.rg,
       ie: pessoa.ie,
@@ -145,6 +147,8 @@ export class PessoaUpdateComponent implements OnInit {
   }
 
   protected createFromForm(): IPessoa {
+    const cpfValue = this.editForm.get(['cpf'])!.value;
+
     return {
       ...new Pessoa(),
       id: this.editForm.get(['id'])!.value,
@@ -161,7 +165,7 @@ export class PessoaUpdateComponent implements OnInit {
       tipoSanguineo: this.editForm.get(['tipoSanguineo'])!.value,
       sexoBiologicoAoNascer: this.editForm.get(['sexoBiologicoAoNascer'])!.value,
       tipoPessoa: this.editForm.get(['tipoPessoa'])!.value,
-      cpf: this.editForm.get(['cpf'])!.value,
+      cpf: cpfValue ? cpfValue.replace(/\D/g, '') : null,
       cnpj: this.editForm.get(['cnpj'])!.value,
       rg: this.editForm.get(['rg'])!.value,
       ie: this.editForm.get(['ie'])!.value,

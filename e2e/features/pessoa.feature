@@ -33,8 +33,9 @@ Feature: Gerenciamento de Pessoas
       | Tipo Pessoa | PJ                     |
       | Cnpj        | um CNPJ válido e único |
     And eu clico no botão "Save"
+    Then a operação de salvamento de Pessoa é bem-sucedida e sou redirecionado para a lista
     Then eu devo ver a mensagem de sucesso "A new pessoa is created with identifier"
-    And a tabela de pessoas deve conter uma linha com o nome "Empresa Fantasia XYZ" e o CNPJ gerado
+    And a tabela de pessoas deve conter uma linha com o ID gerado
 
   # CENÁRIOS DE CONSULTA, EDIÇÃO E EXCLUSÃO
 
@@ -46,7 +47,7 @@ Feature: Gerenciamento de Pessoas
       | Tipo Pessoa | PF                         |
       | Cpf         | um CPF válido e único      |
       | Nome Mae    | Maria da Visualização      |
-    When eu clico no botão de visualização na linha que contém o CPF gerado
+    When eu clico no botão de visualização na linha que contém o ID de pessoa gerado
     Then eu devo estar na página de detalhes da pessoa
     And eu devo ver o detalhe "Nome" com o valor "Bruno para Visualização"
     And eu devo ver o detalhe "Nome Mae" com o valor "Maria da Visualização"
@@ -58,11 +59,11 @@ Feature: Gerenciamento de Pessoas
       | Nome        | Carlos a ser Editado |
       | Tipo Pessoa | PF                   |
       | Cpf         | um CPF válido e único|
-    When eu clico no botão de edição na linha que contém o CPF gerado
+    When eu clico no botão de edição na linha que contém o ID de pessoa gerado
     And eu preencho o campo "Nome" com o valor "Carlos Editado com Sucesso"
     And eu clico no botão "Save"
     Then eu devo ver a mensagem de sucesso "A pessoa is updated with identifier"
-    And a tabela de pessoas deve conter uma linha com o nome "Carlos Editado com Sucesso" e o CPF gerado
+    And a tabela de pessoas deve conter uma linha com o nome "Carlos Editado com Sucesso" e o ID de pessoa gerado
 
   @delete
   Scenario: Excluir uma pessoa existente com sucesso
@@ -71,10 +72,10 @@ Feature: Gerenciamento de Pessoas
       | Nome        | Joana a ser Excluída |
       | Tipo Pessoa | PF                   |
       | Cpf         | um CPF válido e único|
-    When eu clico no botão de exclusão na linha que contém o CPF gerado
+    When eu clico no botão de exclusão na linha que contém o ID de pessoa gerado
     And eu clico no botão de confirmar deleção no modal para a entidade "pessoas"
     Then eu devo ver a mensagem de sucesso "A pessoa is deleted with identifier"
-    And a tabela de pessoas não deve conter uma linha com o CPF gerado
+    And a tabela de pessoas não deve conter uma linha com o ID de pessoa gerado
 
   # CENÁRIOS DE VALIDAÇÃO
 

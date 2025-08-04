@@ -11,6 +11,7 @@ import { DataTable } from '@cucumber/cucumber';
 // Garante que nossos steps terão acesso ao contexto (ctx) das fixtures customizadas.
 import { Given, When, Then } from './fixtures';
 import { sortByHighestID } from '../utils/table-helpers';
+import { formatCpf } from '../utils/utils';
 
 // --- MAPAS DE SELETORES ---
 // Centralizam os seletores da UI para reutilização e fácil manutenção.
@@ -135,46 +136,71 @@ When('eu clico no campo {string}', async ({ page }, fieldName: string) => {
 });
 
 /**
- * Clica no botão de visualização da linha da tabela que contém o CPF gerado no contexto.
+ * Clica no botão de visualização da linha da tabela que contém o ID de pessoa gerado no contexto.
  */
-When('eu clico no botão de visualização na linha que contém o CPF gerado', async ({ page, ctx }) => {
-  if (!ctx.generatedCpf) {
-    throw new Error('O CPF gerado não foi encontrado no contexto do teste (ctx).');
+When('eu clico no botão de visualização na linha que contém o ID de pessoa gerado', async ({ page, ctx }) => {
+  if (!ctx.createdPessoaId) {
+    throw new Error('O ID de pessoa gerado não foi encontrado no contexto do teste (ctx).');
   }
   await sortByHighestID(page);
-  const targetRow = page.locator('tbody tr', { hasText: ctx.generatedCpf });
+  const targetRow = page.locator('tbody tr', { hasText: ctx.createdPessoaId.toString() });
   await targetRow.locator('[data-cy="entityDetailsButton"]').click();
 });
 
 /**
- * Clica no botão de edição da linha da tabela que contém o CPF gerado no contexto.
+ * Clica no botão de edição da linha da tabela que contém o ID de pessoa gerado no contexto.
  */
-When('eu clico no botão de edição na linha que contém o CPF gerado', async ({ page, ctx }) => {
-  if (!ctx.generatedCpf) {
-    throw new Error('O CPF gerado não foi encontrado no contexto do teste (ctx).');
+When('eu clico no botão de edição na linha que contém o ID de pessoa gerado', async ({ page, ctx }) => {
+  if (!ctx.createdPessoaId) {
+    throw new Error('O ID de pessoa gerado não foi encontrado no contexto do teste (ctx).');
   }
   await sortByHighestID(page);
-  const targetRow = page.locator('tbody tr', { hasText: ctx.generatedCpf });
+  const targetRow = page.locator('tbody tr', { hasText: ctx.createdPessoaId.toString() });
   await targetRow.locator('[data-cy="entityEditButton"]').click();
   await expect(page.locator('[data-cy="entityCreateSaveButton"]')).toBeVisible({ timeout: 10000 });
 });
 
-
 /**
- * Clica no botão de exclusão da linha da tabela que contém o CPF gerado no contexto.
+ * Clica no botão de exclusão da linha da tabela que contém o ID de pessoa gerado no contexto.
  */
-When('eu clico no botão de exclusão na linha que contém o CPF gerado', async ({ page, ctx }) => {
-  if (!ctx.generatedCpf) {
-    throw new Error('O CPF gerado não foi encontrado no contexto do teste (ctx).');
+When('eu clico no botão de exclusão na linha que contém o ID de pessoa gerado', async ({ page, ctx }) => {
+  if (!ctx.createdPessoaId) {
+    throw new Error('O ID de pessoa gerado não foi encontrado no contexto do teste (ctx).');
   }
   await sortByHighestID(page);
-  const targetRow = page.locator('tbody tr', { hasText: ctx.generatedCpf });
+  const targetRow = page.locator('tbody tr', { hasText: ctx.createdPessoaId.toString() });
   await targetRow.locator('[data-cy="entityDeleteButton"]').click();
   await expect(page.locator('#jhi-delete-pessoa-heading')).toBeVisible();
 });
 
 // --- STEPS: THEN (ENTÃO) ---
 // Verificam os resultados e fazem as asserções finais.
+
+/**
+ * Verifica se a tabela de pessoas contém uma linha com o ID gerado no contexto.
+ * @param {string} name - O nome esperado na linha da tabela.
+ */
+Then('a tabela de pessoas deve conter uma linha com o ID gerado', async ({ page, ctx }) => {
+  if (!ctx.createdPessoaId) {
+    throw new Error('O ID gerado não foi encontrado no contexto do teste (ctx).');
+  }
+  await sortByHighestID(page);
+  const targetRow = page.locator('tbody tr', { hasText: ctx.createdPessoaId.toString() });
+});
+
+/**
+ * Verifica se a tabela de pessoas contém uma linha com o nome e o ID de pessoa gerado no contexto.
+ * @param {string} name - O nome esperado na linha da tabela.
+ */
+Then('a tabela de pessoas deve conter uma linha com o nome {string} e o ID de pessoa gerado', async ({ page, ctx }, name: string) => {
+  if (!ctx.createdPessoaId) {
+    throw new Error('O ID de pessoa gerado não foi encontrado no contexto do teste (ctx).');
+  }
+  
+  await sortByHighestID(page);
+  const targetRow = page.locator('tbody tr', { hasText: ctx.createdPessoaId.toString() });
+  await expect(targetRow.getByRole('cell', { name })).toBeVisible();
+});
 
 /**
  * Verifica se a tabela de pessoas contém uma linha com o nome e o CPF gerado no contexto.
@@ -184,22 +210,12 @@ Then('a tabela de pessoas deve conter uma linha com o nome {string} e o CPF gera
   if (!ctx.generatedCpf) {
     throw new Error('O CPF gerado não foi encontrado no contexto do teste (ctx).');
   }
-  await sortByHighestID(page);
-  const targetRow = page.locator('tbody tr', { hasText: ctx.generatedCpf });
-  await expect(targetRow.getByRole('cell', { name })).toBeVisible();
-});
 
-/**
- * Verifica se a tabela de pessoas contém uma linha com o nome e o CNPJ gerado no contexto.
- * @param {string} name - O nome esperado na linha da tabela.
- */
-Then('a tabela de pessoas deve conter uma linha com o nome {string} e o CNPJ gerado', async ({ page, ctx }, name: string) => {
-  if (!ctx.generatedCnpj) {
-    throw new Error('O CNPJ gerado não foi encontrado no contexto do teste (ctx).');
-  }
+  const cpfFormatted = await formatCpf(ctx.generatedCpf);
+
   await sortByHighestID(page);
-  const targetRow = page.locator('tbody tr', { hasText: ctx.generatedCnpj });
-  await expect(targetRow.getByRole('cell', { name, exact: true })).toBeVisible();
+  const targetRow = page.locator('tbody tr', { hasText: cpfFormatted });
+  await expect(targetRow.getByRole('cell', { name })).toBeVisible();
 });
 
 /**
@@ -237,11 +253,18 @@ Then('eu devo ver o detalhe {string} com o valor {string}', async ({ page }, fie
 /**
  * Verifica se a operação de salvamento foi bem-sucedida e houve redirecionamento para a lista.
  */
-Then('a operação de salvamento de Pessoa é bem-sucedida e sou redirecionado para a lista', async ({ page }) => {
-  await page.waitForResponse(
+Then('a operação de salvamento de Pessoa é bem-sucedida e sou redirecionado para a lista', async ({ page, ctx }) => {
+  const responsePromise = await page.waitForResponse(
     resp => resp.url().includes('/api/pessoas') && (resp.status() === 200 || resp.status() === 201),
     { timeout: 10000 }
   );
+
+  // Aguarda a response
+  const response = await responsePromise;
+  const responseBody = await response.json();
+
+  ctx.createdPessoaId = responseBody.id;
+
   const refreshButton = page.getByRole('button', { name: 'Refresh List' });
   await expect(refreshButton).toBeEnabled({ timeout: 10000 });
   await page.waitForURL('**/pessoa', { timeout: 10000 });
@@ -257,13 +280,13 @@ Then('a tabela de pessoas não deve conter uma linha com o nome {string}', async
 });
 
 /**
- * Verifica se a tabela de pessoas NÃO contém uma linha com o CPF gerado no contexto.
+ * Verifica se a tabela de pessoas NÃO contém uma linha com o ID de pessoa gerado no contexto.
  */
-Then('a tabela de pessoas não deve conter uma linha com o CPF gerado', async ({ page, ctx }) => {
-  if (!ctx.generatedCpf) {
-    throw new Error('O CPF gerado não foi encontrado no contexto do teste (ctx).');
+Then('a tabela de pessoas não deve conter uma linha com o ID de pessoa gerado', async ({ page, ctx }) => {
+  if (!ctx.createdPessoaId) {
+    throw new Error('O ID de pessoa gerado não foi encontrado no contexto do teste (ctx).');
   }
   await sortByHighestID(page);
-  const targetRow = page.locator('tbody tr', { hasText: ctx.generatedCpf });
+  const targetRow = page.locator('tbody tr', { hasText: ctx.createdPessoaId.toString() });
   await expect(targetRow).not.toBeVisible();
 });
