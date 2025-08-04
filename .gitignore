@@ -161,4 +161,5 @@ Desktop.ini
 ######################
 # Test
 ######################
-/test-results/results.xml
+/test-results/
+/playwright-report/
