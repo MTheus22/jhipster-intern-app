@@ -52,6 +52,9 @@ class PessoaContatoResourceIT {
     private static final String DEFAULT_TELEFONE_NUMERO_COMPLETO = "AAAAAAAAAA";
     private static final String UPDATED_TELEFONE_NUMERO_COMPLETO = "BBBBBBBBBB";
 
+    private static final String DEFAULT_TELEFONE_DDI = "AAAA";
+    private static final String UPDATED_TELEFONE_DDI = "BBBB";
+
     private static final Integer DEFAULT_TELEFONE_DDD = 1;
     private static final Integer UPDATED_TELEFONE_DDD = 2;
 
@@ -104,6 +107,7 @@ class PessoaContatoResourceIT {
             .descricao(DEFAULT_DESCRICAO)
             .contatoDigitalIdent(DEFAULT_CONTATO_DIGITAL_IDENT)
             .telefoneNumeroCompleto(DEFAULT_TELEFONE_NUMERO_COMPLETO)
+            .telefoneDdi(DEFAULT_TELEFONE_DDI)
             .telefoneDdd(DEFAULT_TELEFONE_DDD)
             .telefoneNumero(DEFAULT_TELEFONE_NUMERO)
             .preferido(DEFAULT_PREFERIDO)
@@ -127,6 +131,7 @@ class PessoaContatoResourceIT {
             .descricao(UPDATED_DESCRICAO)
             .contatoDigitalIdent(UPDATED_CONTATO_DIGITAL_IDENT)
             .telefoneNumeroCompleto(UPDATED_TELEFONE_NUMERO_COMPLETO)
+            .telefoneDdi(UPDATED_TELEFONE_DDI)
             .telefoneDdd(UPDATED_TELEFONE_DDD)
             .telefoneNumero(UPDATED_TELEFONE_NUMERO)
             .preferido(UPDATED_PREFERIDO)
@@ -166,6 +171,7 @@ class PessoaContatoResourceIT {
         assertThat(testPessoaContato.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
         assertThat(testPessoaContato.getContatoDigitalIdent()).isEqualTo(DEFAULT_CONTATO_DIGITAL_IDENT);
         assertThat(testPessoaContato.getTelefoneNumeroCompleto()).isEqualTo(DEFAULT_TELEFONE_NUMERO_COMPLETO);
+        assertThat(testPessoaContato.getTelefoneDdi()).isEqualTo(DEFAULT_TELEFONE_DDI);
         assertThat(testPessoaContato.getTelefoneDdd()).isEqualTo(DEFAULT_TELEFONE_DDD);
         assertThat(testPessoaContato.getTelefoneNumero()).isEqualTo(DEFAULT_TELEFONE_NUMERO);
         assertThat(testPessoaContato.getPreferido()).isEqualTo(DEFAULT_PREFERIDO);
@@ -331,6 +337,7 @@ class PessoaContatoResourceIT {
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)))
             .andExpect(jsonPath("$.[*].contatoDigitalIdent").value(hasItem(DEFAULT_CONTATO_DIGITAL_IDENT)))
             .andExpect(jsonPath("$.[*].telefoneNumeroCompleto").value(hasItem(DEFAULT_TELEFONE_NUMERO_COMPLETO)))
+            .andExpect(jsonPath("$.[*].telefoneDdi").value(hasItem(DEFAULT_TELEFONE_DDI)))
             .andExpect(jsonPath("$.[*].telefoneDdd").value(hasItem(DEFAULT_TELEFONE_DDD)))
             .andExpect(jsonPath("$.[*].telefoneNumero").value(hasItem(DEFAULT_TELEFONE_NUMERO.intValue())))
             .andExpect(jsonPath("$.[*].preferido").value(hasItem(DEFAULT_PREFERIDO.booleanValue())))
@@ -357,6 +364,7 @@ class PessoaContatoResourceIT {
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO))
             .andExpect(jsonPath("$.contatoDigitalIdent").value(DEFAULT_CONTATO_DIGITAL_IDENT))
             .andExpect(jsonPath("$.telefoneNumeroCompleto").value(DEFAULT_TELEFONE_NUMERO_COMPLETO))
+            .andExpect(jsonPath("$.telefoneDdi").value(DEFAULT_TELEFONE_DDI))
             .andExpect(jsonPath("$.telefoneDdd").value(DEFAULT_TELEFONE_DDD))
             .andExpect(jsonPath("$.telefoneNumero").value(DEFAULT_TELEFONE_NUMERO.intValue()))
             .andExpect(jsonPath("$.preferido").value(DEFAULT_PREFERIDO.booleanValue()))
@@ -391,6 +399,7 @@ class PessoaContatoResourceIT {
             .descricao(UPDATED_DESCRICAO)
             .contatoDigitalIdent(UPDATED_CONTATO_DIGITAL_IDENT)
             .telefoneNumeroCompleto(UPDATED_TELEFONE_NUMERO_COMPLETO)
+            .telefoneDdi(UPDATED_TELEFONE_DDI)
             .telefoneDdd(UPDATED_TELEFONE_DDD)
             .telefoneNumero(UPDATED_TELEFONE_NUMERO)
             .preferido(UPDATED_PREFERIDO)
@@ -418,6 +427,7 @@ class PessoaContatoResourceIT {
         assertThat(testPessoaContato.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
         assertThat(testPessoaContato.getContatoDigitalIdent()).isEqualTo(UPDATED_CONTATO_DIGITAL_IDENT);
         assertThat(testPessoaContato.getTelefoneNumeroCompleto()).isEqualTo(UPDATED_TELEFONE_NUMERO_COMPLETO);
+        assertThat(testPessoaContato.getTelefoneDdi()).isEqualTo(UPDATED_TELEFONE_DDI);
         assertThat(testPessoaContato.getTelefoneDdd()).isEqualTo(UPDATED_TELEFONE_DDD);
         assertThat(testPessoaContato.getTelefoneNumero()).isEqualTo(UPDATED_TELEFONE_NUMERO);
         assertThat(testPessoaContato.getPreferido()).isEqualTo(UPDATED_PREFERIDO);
@@ -514,9 +524,10 @@ class PessoaContatoResourceIT {
             .dataImportacao(UPDATED_DATA_IMPORTACAO)
             .contatoDigitalIdent(UPDATED_CONTATO_DIGITAL_IDENT)
             .telefoneNumeroCompleto(UPDATED_TELEFONE_NUMERO_COMPLETO)
-            .telefoneDdd(UPDATED_TELEFONE_DDD)
+            .telefoneDdi(UPDATED_TELEFONE_DDI)
+            .telefoneNumero(UPDATED_TELEFONE_NUMERO)
             .preferido(UPDATED_PREFERIDO)
-            .receberPropagandas(UPDATED_RECEBER_PROPAGANDAS)
+            .receberConfirmacoes(UPDATED_RECEBER_CONFIRMACOES)
             .possuiWhatsapp(UPDATED_POSSUI_WHATSAPP);
 
         restPessoaContatoMockMvc
@@ -538,11 +549,12 @@ class PessoaContatoResourceIT {
         assertThat(testPessoaContato.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
         assertThat(testPessoaContato.getContatoDigitalIdent()).isEqualTo(UPDATED_CONTATO_DIGITAL_IDENT);
         assertThat(testPessoaContato.getTelefoneNumeroCompleto()).isEqualTo(UPDATED_TELEFONE_NUMERO_COMPLETO);
-        assertThat(testPessoaContato.getTelefoneDdd()).isEqualTo(UPDATED_TELEFONE_DDD);
-        assertThat(testPessoaContato.getTelefoneNumero()).isEqualTo(DEFAULT_TELEFONE_NUMERO);
+        assertThat(testPessoaContato.getTelefoneDdi()).isEqualTo(UPDATED_TELEFONE_DDI);
+        assertThat(testPessoaContato.getTelefoneDdd()).isEqualTo(DEFAULT_TELEFONE_DDD);
+        assertThat(testPessoaContato.getTelefoneNumero()).isEqualTo(UPDATED_TELEFONE_NUMERO);
         assertThat(testPessoaContato.getPreferido()).isEqualTo(UPDATED_PREFERIDO);
-        assertThat(testPessoaContato.getReceberPropagandas()).isEqualTo(UPDATED_RECEBER_PROPAGANDAS);
-        assertThat(testPessoaContato.getReceberConfirmacoes()).isEqualTo(DEFAULT_RECEBER_CONFIRMACOES);
+        assertThat(testPessoaContato.getReceberPropagandas()).isEqualTo(DEFAULT_RECEBER_PROPAGANDAS);
+        assertThat(testPessoaContato.getReceberConfirmacoes()).isEqualTo(UPDATED_RECEBER_CONFIRMACOES);
         assertThat(testPessoaContato.getPossuiWhatsapp()).isEqualTo(UPDATED_POSSUI_WHATSAPP);
     }
 
@@ -565,6 +577,7 @@ class PessoaContatoResourceIT {
             .descricao(UPDATED_DESCRICAO)
             .contatoDigitalIdent(UPDATED_CONTATO_DIGITAL_IDENT)
             .telefoneNumeroCompleto(UPDATED_TELEFONE_NUMERO_COMPLETO)
+            .telefoneDdi(UPDATED_TELEFONE_DDI)
             .telefoneDdd(UPDATED_TELEFONE_DDD)
             .telefoneNumero(UPDATED_TELEFONE_NUMERO)
             .preferido(UPDATED_PREFERIDO)
@@ -591,6 +604,7 @@ class PessoaContatoResourceIT {
         assertThat(testPessoaContato.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
         assertThat(testPessoaContato.getContatoDigitalIdent()).isEqualTo(UPDATED_CONTATO_DIGITAL_IDENT);
         assertThat(testPessoaContato.getTelefoneNumeroCompleto()).isEqualTo(UPDATED_TELEFONE_NUMERO_COMPLETO);
+        assertThat(testPessoaContato.getTelefoneDdi()).isEqualTo(UPDATED_TELEFONE_DDI);
         assertThat(testPessoaContato.getTelefoneDdd()).isEqualTo(UPDATED_TELEFONE_DDD);
         assertThat(testPessoaContato.getTelefoneNumero()).isEqualTo(UPDATED_TELEFONE_NUMERO);
         assertThat(testPessoaContato.getPreferido()).isEqualTo(UPDATED_PREFERIDO);

@@ -9,10 +9,7 @@ Feature: Gerenciamento de Pessoas
     When eu faço login com as credenciais "admin" e "admin"
     And eu navego para a lista de "Pessoa"
 
-  # ----------------------------------------------------------------
-  # CENÁRIOS DE CRIAÇÃO (HAPPY PATH)
-  # Estes cenários testam a UI de criação, portanto usam "When".
-  # ----------------------------------------------------------------
+  # CENÁRIOS DE CRIAÇÃO
 
   @create
   Scenario: Criar uma nova pessoa física com sucesso
@@ -39,26 +36,7 @@ Feature: Gerenciamento de Pessoas
     Then eu devo ver a mensagem de sucesso "A new pessoa is created with identifier"
     And a tabela de pessoas deve conter uma linha com o nome "Empresa Fantasia XYZ" e o CNPJ gerado
 
-  # ----------------------------------------------------------------
-  # CENÁRIOS DE VALIDAÇÃO (UNHAPPY PATHS)
-  # ----------------------------------------------------------------
-
-  @validation
-  Scenario: Tentar criar uma pessoa sem o campo "Nome"
-    When eu clico no botão "Create a new Pessoa"
-    And eu preencho o formulário de pessoa com os seguintes dados:
-      | campo       | valor                 |
-      | Tipo Pessoa | PF                    |
-      | Cpf         | um CPF válido e único |
-    Then o botão "Save" deve estar desabilitado
-    When eu clico no campo "Nome"
-    And eu clico no campo "Cpf"
-    Then eu devo ver a mensagem de erro "This field is required." para o campo "Nome"
-
-  # ----------------------------------------------------------------
   # CENÁRIOS DE CONSULTA, EDIÇÃO E EXCLUSÃO
-  # Estes cenários usam "Given" para preparar o estado do sistema.
-  # ----------------------------------------------------------------
 
   @view
   Scenario: Visualizar os detalhes de uma pessoa existente
@@ -94,6 +72,20 @@ Feature: Gerenciamento de Pessoas
       | Tipo Pessoa | PF                   |
       | Cpf         | um CPF válido e único|
     When eu clico no botão de exclusão na linha que contém o CPF gerado
-    And eu clico no botão de confirmação "Delete" no modal
+    And eu clico no botão de confirmar deleção no modal para a entidade "pessoas"
     Then eu devo ver a mensagem de sucesso "A pessoa is deleted with identifier"
     And a tabela de pessoas não deve conter uma linha com o CPF gerado
+
+  # CENÁRIOS DE VALIDAÇÃO
+
+  @validation
+  Scenario: Tentar criar uma pessoa sem o campo "Nome"
+    When eu clico no botão "Create a new Pessoa"
+    And eu preencho o formulário de pessoa com os seguintes dados:
+      | campo       | valor                 |
+      | Tipo Pessoa | PF                    |
+      | Cpf         | um CPF válido e único |
+    Then o botão "Save" deve estar desabilitado
+    When eu clico no campo "Nome"
+    And eu clico no campo "Cpf"
+    Then eu devo ver a mensagem de erro "This field is required." para o campo "Nome"

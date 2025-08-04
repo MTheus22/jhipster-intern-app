@@ -88,6 +88,12 @@ public class PessoaDTO implements Serializable {
 
     private String raca;
 
+    /**
+     * Data de exclusão lógica - NULL = ativo, valor = excluído
+     */
+    @Schema(description = "Data de exclusão lógica - NULL = ativo, valor = excluído")
+    private Instant dataExclusao;
+
     public Long getId() {
         return id;
     }
@@ -248,6 +254,14 @@ public class PessoaDTO implements Serializable {
         this.raca = raca;
     }
 
+    public Instant getDataExclusao() {
+        return dataExclusao;
+    }
+
+    public void setDataExclusao(Instant dataExclusao) {
+        this.dataExclusao = dataExclusao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -293,6 +307,7 @@ public class PessoaDTO implements Serializable {
             ", observacoes='" + getObservacoes() + "'" +
             ", naturalidade='" + getNaturalidade() + "'" +
             ", raca='" + getRaca() + "'" +
+            ", dataExclusao='" + getDataExclusao() + "'" +
             "}";
     }
 }

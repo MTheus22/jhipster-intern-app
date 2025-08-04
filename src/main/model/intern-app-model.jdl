@@ -56,6 +56,7 @@ entity Pessoa {
     observacoes TextBlob
     naturalidade String
     raca String
+    dataExclusao Instant /** Data de exclusão lógica - NULL = ativo, valor = excluído */
 }
 enum EstadoCivil{
     SOLTEIRO("SOL")
@@ -94,6 +95,7 @@ entity PessoaContato{
     descricao String
     contatoDigitalIdent String /** identificação na Rede Social, exemplo "superlauro" */
     telefoneNumeroCompleto String /** pode ter o simbolo 'plus', ddi, ddd alem do numero */
+    telefoneDdi String maxlength(4)
     telefoneDdd Integer /** Caso o contato seja um número de telefone */
     telefoneNumero Long  /** Caso o contato seja um número de telefone */
     preferido Boolean required

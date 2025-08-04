@@ -1,11 +1,11 @@
-id;data_registro;data_importacao;data_exclusao;descricao;contato_digital_ident;telefone_numero_completo;telefone_ddd;telefone_numero;preferido;receber_propagandas;receber_confirmacoes;possui_whatsapp
-1;2023-07-27T00:56:44;2023-07-27T14:51:34;2023-07-27T17:24:12;Sem;compress fúchsia;Reduced;23516;84217;false;true;true;true
-2;2023-07-27T22:18:46;2023-07-27T14:51:37;2023-07-27T18:43:57;deposit Interactions program;preto;Accountability repurpose;19678;28622;true;false;true;false
-3;2023-07-27T02:04:40;2023-07-27T03:45:20;2023-07-27T06:23:35;de Macio;index transmitting Aço;Forward optical Computador;19691;81266;false;true;true;false
-4;2023-07-27T12:37:41;2023-07-27T16:37:52;2023-07-27T16:37:43;Rua Buckinghamshire;Chapéu;capacitor asynchronous UAE;12324;73530;true;true;true;true
-5;2023-07-27T17:49:02;2023-07-27T08:55:55;2023-07-27T07:05:23;matrix copying UIC-Franc;Fresco Macio Representative;out-of-the-box Producer Response;14622;6686;true;true;false;true
-6;2023-07-27T17:13:37;2023-07-27T14:01:33;2023-07-27T01:16:38;monitoring;Response Buckinghamshire Rústico;Jogos;16387;79598;true;false;true;false
-7;2023-07-27T20:13:30;2023-07-27T11:18:21;2023-07-27T07:24:00;Auto Licenciado robust;Program Avon;Right-sized parsing Division;78665;95857;false;true;true;false
-8;2023-07-27T08:07:42;2023-07-27T02:56:20;2023-07-27T03:58:31;Checking Etiópia;Up-sized roxo;navigating robust Mouse;85960;28401;true;false;true;true
-9;2023-07-27T01:44:09;2023-07-27T19:19:55;2023-07-27T22:39:25;Ruble copy;Maiote;Rua Computadores;27289;80350;false;true;true;false
-10;2023-07-27T16:56:50;2023-07-27T01:58:34;2023-07-27T13:59:53;Crianças;input Algodão Technician;withdrawal firewall;76494;90679;false;true;true;false
+id;data_registro;data_importacao;data_exclusao;descricao;contato_digital_ident;telefone_numero_completo;telefone_ddi;telefone_ddd;telefone_numero;preferido;receber_propagandas;receber_confirmacoes;possui_whatsapp
+1;2023-07-27T00:56:44;2023-07-27T14:51:34;2023-07-27T17:24:12;Sem;compress fúchsia;Reduced;comp;82715;51613;false;false;false;true
+2;2023-07-27T07:52:47;2023-07-27T23:09:05;2023-07-27T22:52:58;Customer lilás preto;Accountability repurpose;multi-tasking;supe;62699;73089;true;true;true;true
+3;2023-07-27T14:08:59;2023-07-27T06:21:41;2023-07-27T03:21:18;Madeira Visionary calculate;digital Avenida expedite;Avenida Minas;Buck;32220;97362;true;true;true;false
+4;2023-07-27T21:21:49;2023-07-27T06:47:51;2023-07-27T06:59:57;infrastructures;Customer Polarised 1080p;copying UIC-Franc boliviano;Maci;96790;95454;true;true;false;true
+5;2023-07-27T00:04:57;2023-07-27T00:01:17;2023-07-27T06:04:03;Response Aço;tangible cultivate monitoring;Response Buckinghamshire Rústico;Jogo;16387;79598;true;false;true;false
+6;2023-07-27T20:13:30;2023-07-27T11:18:21;2023-07-27T07:24:00;Auto Licenciado robust;Program Avon;Right-sized parsing Division;Bran;62197;8396;false;true;false;false
+7;2023-07-27T08:51:36;2023-07-27T17:32:00;2023-07-27T01:28:16;roxo Internal withdrawal;Mouse SQL middleware;Cadeira Ruble copy;Maio;49774;45275;false;false;false;false
+8;2023-07-27T04:39:31;2023-07-27T17:01:36;2023-07-27T04:17:32;Producer;Regional;Account;calc;83363;57777;true;false;false;true
+9;2023-07-27T10:51:22;2023-07-27T21:52:27;2023-07-27T05:13:04;limão enterprise e-services;Goiás;infrastructure;Sem ;70752;94056;false;true;false;false
+10;2023-07-27T05:00:02;2023-07-27T11:49:10;2023-07-27T18:39:16;Berkshire;Ceará;Inteligente Bulgária;24/7;90975;32317;false;true;true;false

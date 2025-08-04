@@ -94,6 +94,11 @@
     {
       "fieldName": "raca",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "dataExclusao",
+      "fieldType": "Instant",
+      "javadoc": "Data de exclusão lógica - NULL = ativo, valor = excluído"
     }
   ],
   "fluentMethods": true,

@@ -25,6 +25,7 @@ export interface IPessoa {
   observacoes?: string | null;
   naturalidade?: string | null;
   raca?: string | null;
+  dataExclusao?: dayjs.Dayjs | null;
 }
 
 export class Pessoa implements IPessoa {
@@ -48,7 +49,8 @@ export class Pessoa implements IPessoa {
     public estadoCivil?: EstadoCivil | null,
     public observacoes?: string | null,
     public naturalidade?: string | null,
-    public raca?: string | null
+    public raca?: string | null,
+    public dataExclusao?: dayjs.Dayjs | null
   ) {
     this.possuiNomeSocial = this.possuiNomeSocial ?? false;
   }

@@ -106,6 +106,23 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" for="field_telefoneDdi">Telefone Ddi</label>
+          <input
+            type="text"
+            class="form-control"
+            name="telefoneDdi"
+            id="field_telefoneDdi"
+            data-cy="telefoneDdi"
+            formControlName="telefoneDdi"
+          />
+          <div *ngIf="editForm.get('telefoneDdi')!.invalid && (editForm.get('telefoneDdi')!.dirty || editForm.get('telefoneDdi')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('telefoneDdi')?.errors?.maxlength">
+              This field cannot be longer than 4 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" for="field_telefoneDdd" ngbTooltip="Caso o contato seja um número de telefone"
             >Telefone Ddd</label
           >

@@ -9,6 +9,7 @@ export interface IPessoaContato {
   descricao?: string | null;
   contatoDigitalIdent?: string | null;
   telefoneNumeroCompleto?: string | null;
+  telefoneDdi?: string | null;
   telefoneDdd?: number | null;
   telefoneNumero?: number | null;
   preferido?: boolean;
@@ -27,6 +28,7 @@ export class PessoaContato implements IPessoaContato {
     public descricao?: string | null,
     public contatoDigitalIdent?: string | null,
     public telefoneNumeroCompleto?: string | null,
+    public telefoneDdi?: string | null,
     public telefoneDdd?: number | null,
     public telefoneNumero?: number | null,
     public preferido?: boolean,

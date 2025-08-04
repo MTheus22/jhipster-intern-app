@@ -78,6 +78,7 @@ export class PessoaService {
     return Object.assign({}, pessoa, {
       dataRegistro: pessoa.dataRegistro?.isValid() ? pessoa.dataRegistro.toJSON() : undefined,
       dataNascimento: pessoa.dataNascimento?.isValid() ? pessoa.dataNascimento.format(DATE_FORMAT) : undefined,
+      dataExclusao: pessoa.dataExclusao?.isValid() ? pessoa.dataExclusao.toJSON() : undefined,
     });
   }
 
@@ -85,6 +86,7 @@ export class PessoaService {
     if (res.body) {
       res.body.dataRegistro = res.body.dataRegistro ? dayjs(res.body.dataRegistro) : undefined;
       res.body.dataNascimento = res.body.dataNascimento ? dayjs(res.body.dataNascimento) : undefined;
+      res.body.dataExclusao = res.body.dataExclusao ? dayjs(res.body.dataExclusao) : undefined;
     }
     return res;
   }
@@ -94,6 +96,7 @@ export class PessoaService {
       res.body.forEach((pessoa: IPessoa) => {
         pessoa.dataRegistro = pessoa.dataRegistro ? dayjs(pessoa.dataRegistro) : undefined;
         pessoa.dataNascimento = pessoa.dataNascimento ? dayjs(pessoa.dataNascimento) : undefined;
+        pessoa.dataExclusao = pessoa.dataExclusao ? dayjs(pessoa.dataExclusao) : undefined;
       });
     }
     return res;

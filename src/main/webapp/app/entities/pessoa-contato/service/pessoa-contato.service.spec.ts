@@ -31,6 +31,7 @@ describe('PessoaContato Service', () => {
       descricao: 'AAAAAAA',
       contatoDigitalIdent: 'AAAAAAA',
       telefoneNumeroCompleto: 'AAAAAAA',
+      telefoneDdi: 'AAAAAAA',
       telefoneDdd: 0,
       telefoneNumero: 0,
       preferido: false,
@@ -95,6 +96,7 @@ describe('PessoaContato Service', () => {
           descricao: 'BBBBBB',
           contatoDigitalIdent: 'BBBBBB',
           telefoneNumeroCompleto: 'BBBBBB',
+          telefoneDdi: 'BBBBBB',
           telefoneDdd: 1,
           telefoneNumero: 1,
           preferido: true,
@@ -126,7 +128,8 @@ describe('PessoaContato Service', () => {
         {
           dataImportacao: currentDate.format(DATE_TIME_FORMAT),
           contatoDigitalIdent: 'BBBBBB',
-          receberPropagandas: true,
+          preferido: true,
+          possuiWhatsapp: true,
         },
         new PessoaContato()
       );
@@ -159,6 +162,7 @@ describe('PessoaContato Service', () => {
           descricao: 'BBBBBB',
           contatoDigitalIdent: 'BBBBBB',
           telefoneNumeroCompleto: 'BBBBBB',
+          telefoneDdi: 'BBBBBB',
           telefoneDdd: 1,
           telefoneNumero: 1,
           preferido: true,
@@ -223,7 +227,7 @@ describe('PessoaContato Service', () => {
       });
 
       it('should add only unique PessoaContato to an array', () => {
-        const pessoaContatoArray: IPessoaContato[] = [{ id: 123 }, { id: 456 }, { id: 88677 }];
+        const pessoaContatoArray: IPessoaContato[] = [{ id: 123 }, { id: 456 }, { id: 88223 }];
         const pessoaContatoCollection: IPessoaContato[] = [{ id: 123 }];
         expectedResult = service.addPessoaContatoToCollectionIfMissing(pessoaContatoCollection, ...pessoaContatoArray);
         expect(expectedResult).toHaveLength(3);

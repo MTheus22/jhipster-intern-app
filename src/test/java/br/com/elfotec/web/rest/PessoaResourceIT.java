@@ -98,6 +98,9 @@ class PessoaResourceIT {
     private static final String DEFAULT_RACA = "AAAAAAAAAA";
     private static final String UPDATED_RACA = "BBBBBBBBBB";
 
+    private static final Instant DEFAULT_DATA_EXCLUSAO = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATA_EXCLUSAO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
     private static final String ENTITY_API_URL = "/api/pessoas";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -144,7 +147,8 @@ class PessoaResourceIT {
             .estadoCivil(DEFAULT_ESTADO_CIVIL)
             .observacoes(DEFAULT_OBSERVACOES)
             .naturalidade(DEFAULT_NATURALIDADE)
-            .raca(DEFAULT_RACA);
+            .raca(DEFAULT_RACA)
+            .dataExclusao(DEFAULT_DATA_EXCLUSAO);
         return pessoa;
     }
 
@@ -174,7 +178,8 @@ class PessoaResourceIT {
             .estadoCivil(UPDATED_ESTADO_CIVIL)
             .observacoes(UPDATED_OBSERVACOES)
             .naturalidade(UPDATED_NATURALIDADE)
-            .raca(UPDATED_RACA);
+            .raca(UPDATED_RACA)
+            .dataExclusao(UPDATED_DATA_EXCLUSAO);
         return pessoa;
     }
 
@@ -221,6 +226,7 @@ class PessoaResourceIT {
         assertThat(testPessoa.getObservacoes()).isEqualTo(DEFAULT_OBSERVACOES);
         assertThat(testPessoa.getNaturalidade()).isEqualTo(DEFAULT_NATURALIDADE);
         assertThat(testPessoa.getRaca()).isEqualTo(DEFAULT_RACA);
+        assertThat(testPessoa.getDataExclusao()).isEqualTo(DEFAULT_DATA_EXCLUSAO);
     }
 
     @Test
@@ -346,7 +352,8 @@ class PessoaResourceIT {
             .andExpect(jsonPath("$.[*].estadoCivil").value(hasItem(DEFAULT_ESTADO_CIVIL.toString())))
             .andExpect(jsonPath("$.[*].observacoes").value(hasItem(DEFAULT_OBSERVACOES.toString())))
             .andExpect(jsonPath("$.[*].naturalidade").value(hasItem(DEFAULT_NATURALIDADE)))
-            .andExpect(jsonPath("$.[*].raca").value(hasItem(DEFAULT_RACA)));
+            .andExpect(jsonPath("$.[*].raca").value(hasItem(DEFAULT_RACA)))
+            .andExpect(jsonPath("$.[*].dataExclusao").value(hasItem(DEFAULT_DATA_EXCLUSAO.toString())));
     }
 
     @Test
@@ -379,7 +386,8 @@ class PessoaResourceIT {
             .andExpect(jsonPath("$.estadoCivil").value(DEFAULT_ESTADO_CIVIL.toString()))
             .andExpect(jsonPath("$.observacoes").value(DEFAULT_OBSERVACOES.toString()))
             .andExpect(jsonPath("$.naturalidade").value(DEFAULT_NATURALIDADE))
-            .andExpect(jsonPath("$.raca").value(DEFAULT_RACA));
+            .andExpect(jsonPath("$.raca").value(DEFAULT_RACA))
+            .andExpect(jsonPath("$.dataExclusao").value(DEFAULT_DATA_EXCLUSAO.toString()));
     }
 
     @Test
@@ -420,7 +428,8 @@ class PessoaResourceIT {
             .estadoCivil(UPDATED_ESTADO_CIVIL)
             .observacoes(UPDATED_OBSERVACOES)
             .naturalidade(UPDATED_NATURALIDADE)
-            .raca(UPDATED_RACA);
+            .raca(UPDATED_RACA)
+            .dataExclusao(UPDATED_DATA_EXCLUSAO);
         PessoaDTO pessoaDTO = pessoaMapper.toDto(updatedPessoa);
 
         restPessoaMockMvc
@@ -455,6 +464,7 @@ class PessoaResourceIT {
         assertThat(testPessoa.getObservacoes()).isEqualTo(UPDATED_OBSERVACOES);
         assertThat(testPessoa.getNaturalidade()).isEqualTo(UPDATED_NATURALIDADE);
         assertThat(testPessoa.getRaca()).isEqualTo(UPDATED_RACA);
+        assertThat(testPessoa.getDataExclusao()).isEqualTo(UPDATED_DATA_EXCLUSAO);
     }
 
     @Test
@@ -552,7 +562,8 @@ class PessoaResourceIT {
             .tipoPessoa(UPDATED_TIPO_PESSOA)
             .cnpj(UPDATED_CNPJ)
             .ie(UPDATED_IE)
-            .naturalidade(UPDATED_NATURALIDADE);
+            .naturalidade(UPDATED_NATURALIDADE)
+            .dataExclusao(UPDATED_DATA_EXCLUSAO);
 
         restPessoaMockMvc
             .perform(
@@ -586,6 +597,7 @@ class PessoaResourceIT {
         assertThat(testPessoa.getObservacoes()).isEqualTo(DEFAULT_OBSERVACOES);
         assertThat(testPessoa.getNaturalidade()).isEqualTo(UPDATED_NATURALIDADE);
         assertThat(testPessoa.getRaca()).isEqualTo(DEFAULT_RACA);
+        assertThat(testPessoa.getDataExclusao()).isEqualTo(UPDATED_DATA_EXCLUSAO);
     }
 
     @Test
@@ -619,7 +631,8 @@ class PessoaResourceIT {
             .estadoCivil(UPDATED_ESTADO_CIVIL)
             .observacoes(UPDATED_OBSERVACOES)
             .naturalidade(UPDATED_NATURALIDADE)
-            .raca(UPDATED_RACA);
+            .raca(UPDATED_RACA)
+            .dataExclusao(UPDATED_DATA_EXCLUSAO);
 
         restPessoaMockMvc
             .perform(
@@ -653,6 +666,7 @@ class PessoaResourceIT {
         assertThat(testPessoa.getObservacoes()).isEqualTo(UPDATED_OBSERVACOES);
         assertThat(testPessoa.getNaturalidade()).isEqualTo(UPDATED_NATURALIDADE);
         assertThat(testPessoa.getRaca()).isEqualTo(UPDATED_RACA);
+        assertThat(testPessoa.getDataExclusao()).isEqualTo(UPDATED_DATA_EXCLUSAO);
     }
 
     @Test

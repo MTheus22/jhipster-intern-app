@@ -1,6 +1,6 @@
 <div>
   <h2 id="page-heading" data-cy="PessoaContatoHeading">
-    <span>Pessoa Contatos</span>
+    <span>Pessoa Contatoes</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="reset()" [disabled]="isLoading">
@@ -25,7 +25,7 @@
   <jhi-alert></jhi-alert>
 
   <div class="alert alert-warning" id="no-result" *ngIf="pessoaContatoes?.length === 0">
-    <span>No Pessoa Contatos found</span>
+    <span>No pessoaContatoes found</span>
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="pessoaContatoes && pessoaContatoes.length > 0">
@@ -39,6 +39,7 @@
           <th scope="col" jhiSortBy="descricao"><span>Descricao</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="contatoDigitalIdent"><span>Contato Digital Ident</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="telefoneNumeroCompleto"><span>Telefone Numero Completo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="telefoneDdi"><span>Telefone Ddi</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="telefoneDdd"><span>Telefone Ddd</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="telefoneNumero"><span>Telefone Numero</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="preferido"><span>Preferido</span> <fa-icon icon="sort"></fa-icon></th>
@@ -60,6 +61,7 @@
           <td>{{ pessoaContato.descricao }}</td>
           <td>{{ pessoaContato.contatoDigitalIdent }}</td>
           <td>{{ pessoaContato.telefoneNumeroCompleto }}</td>
+          <td>{{ pessoaContato.telefoneDdi }}</td>
           <td>{{ pessoaContato.telefoneDdd }}</td>
           <td>{{ pessoaContato.telefoneNumero }}</td>
           <td>{{ pessoaContato.preferido }}</td>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Add dataExclusao column to implement soft delete for Pessoa entity.
+        When dataExclusao IS NULL = active record
+        When dataExclusao IS NOT NULL = logically deleted record
+    -->
+    <changeSet id="20250804040155-1" author="matheus">
+        <addColumn tableName="pessoa">
+            <column name="data_exclusao" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        
+        <!-- Add index for performance on soft delete queries -->
+        <createIndex indexName="idx_pessoa_data_exclusao" tableName="pessoa">
+            <column name="data_exclusao"/>
+        </createIndex>
+        
+        <!-- Add comment for documentation -->
+        <setColumnRemarks tableName="pessoa" columnName="data_exclusao" 
+                         remarks="Data de exclusão lógica - NULL = ativo, valor = excluído"/>
+    </changeSet>
+
+</databaseChangeLog>

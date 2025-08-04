@@ -1,16 +1,104 @@
-<testsuites id="" name="" tests="6" failures="0" skipped="0" errors="0" time="21.318218">
-<testsuite name="e2e/features/pessoa.feature.spec.js" timestamp="2025-08-03T20:36:12.426Z" hostname="" tests="6" failures="0" skipped="0" time="19.692" errors="0">
-<testcase name="Gerenciamento de Pessoas › Criar uma nova pessoa física com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="4.697">
+<testsuites id="" name="" tests="10" failures="2" skipped="0" errors="0" time="44.295274">
+<testsuite name="e2e/features/pessoa-contato.feature.spec.js" timestamp="2025-08-04T04:47:35.456Z" hostname="" tests="4" failures="2" skipped="0" time="41.746" errors="0">
+<testcase name="Gerenciamento de Contatos de Pessoas › Criar um novo contato do tipo telefone para uma pessoa" classname="e2e/features/pessoa-contato.feature.spec.js" time="30.025">
+<failure message="pessoa-contato.feature.spec.js:13:7 Criar um novo contato do tipo telefone para uma pessoa" type="FAILURE">
+<![CDATA[  e2e/features/pessoa-contato.feature.spec.js:13:7 › Gerenciamento de Contatos de Pessoas › Criar um novo contato do tipo telefone para uma pessoa @pessoascontato @create › And eu preencho o formulário de contato de pessoa com os seguintes dados: 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('[data-cy="contato"]')
+        - locator resolved to <select name="contato" data-cy="contato" id="field_contato" formcontrolname="contato" ng-reflect-name="contato" class="form-control ng-untouched ng-pristine ng-valid">…</select>
+      - attempting select option action
+        2 × waiting for element to be visible and enabled
+          - did not find some options
+        - retrying select option action
+        - waiting 20ms
+        2 × waiting for element to be visible and enabled
+          - did not find some options
+        - retrying select option action
+          - waiting 100ms
+        54 × waiting for element to be visible and enabled
+           - did not find some options
+         - retrying select option action
+           - waiting 500ms
+
+
+       at ../steps/pessoa-contato.steps.ts:171
+
+      169 |       
+      170 |       // Seleciona a opção baseada no texto visível, que é o ID da pessoa
+    > 171 |       await page.locator(fieldConfig.selector).selectOption({ label: ctx.createdPessoaId.toString() });
+          |                                                ^
+      172 |     } 
+      173 |     // Tratamento para diferentes tipos de campos
+      174 |     else if (fieldConfig.type === 'input') {
+        at Object.<anonymous> (/home/matheus/Projects/elfotec/jhipster-intern-app/e2e/steps/pessoa-contato.steps.ts:171:48)
+        at /home/matheus/Projects/elfotec/jhipster-intern-app/e2e/.bdd-generated/e2e/features/pessoa-contato.feature.spec.js:15:5
+
+    Error Context: ../../test-results/e2e-features-pessoa-contat-725c8-po-telefone-para-uma-pessoa/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|e2e-features-pessoa-contat-725c8-po-telefone-para-uma-pessoa/error-context.md]]
+]]>
+</system-out>
 </testcase>
-<testcase name="Gerenciamento de Pessoas › Criar uma nova pessoa jurídica com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="2.806">
+<testcase name="Gerenciamento de Contatos de Pessoas › Editar um contato de pessoa existente com sucesso" classname="e2e/features/pessoa-contato.feature.spec.js" time="2.744">
 </testcase>
-<testcase name="Gerenciamento de Pessoas › Tentar criar uma pessoa sem o campo &quot;Nome&quot;" classname="e2e/features/pessoa.feature.spec.js" time="2.246">
+<testcase name="Gerenciamento de Contatos de Pessoas › Excluir um contato de pessoa existente com sucesso" classname="e2e/features/pessoa-contato.feature.spec.js" time="2.553">
 </testcase>
-<testcase name="Gerenciamento de Pessoas › Visualizar os detalhes de uma pessoa existente" classname="e2e/features/pessoa.feature.spec.js" time="3.28">
+<testcase name="Gerenciamento de Contatos de Pessoas › Tentar criar um contato sem selecionar uma Pessoa" classname="e2e/features/pessoa-contato.feature.spec.js" time="6.424">
+<failure message="pessoa-contato.feature.spec.js:40:7 Tentar criar um contato sem selecionar uma Pessoa" type="FAILURE">
+<![CDATA[  e2e/features/pessoa-contato.feature.spec.js:40:7 › Gerenciamento de Contatos de Pessoas › Tentar criar um contato sem selecionar uma Pessoa @pessoascontato @validation › Then o botão "Save" deve estar desabilitado 
+
+    Error: Timed out 5000ms waiting for expect(locator).toBeDisabled()
+
+    Locator: locator('[data-cy="entityCreateSaveButton"]')
+    Expected: disabled
+    Received: enabled
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for locator('[data-cy="entityCreateSaveButton"]')
+        9 × locator resolved to <button type="submit" id="save-entity" class="btn btn-primary" data-cy="entityCreateSaveButton">…</button>
+          - unexpected value "enabled"
+
+
+       at ../steps/common.steps.ts:126
+
+      124 |     throw new Error(`Seletor não definido para o botão "${buttonName}".`);
+      125 |   }
+    > 126 |   await expect(page.locator(selector)).toBeDisabled();
+          |                                        ^
+      127 | });
+      128 |
+        at Object.<anonymous> (/home/matheus/Projects/elfotec/jhipster-intern-app/e2e/steps/common.steps.ts:126:40)
+        at /home/matheus/Projects/elfotec/jhipster-intern-app/e2e/.bdd-generated/e2e/features/pessoa-contato.feature.spec.js:43:5
+
+    Error Context: ../../test-results/e2e-features-pessoa-contat-4f8aa-o-sem-selecionar-uma-Pessoa/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|e2e-features-pessoa-contat-4f8aa-o-sem-selecionar-uma-Pessoa/error-context.md]]
+]]>
+</system-out>
 </testcase>
-<testcase name="Gerenciamento de Pessoas › Editar uma pessoa existente com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="3.445">
+</testsuite>
+<testsuite name="e2e/features/pessoa.feature.spec.js" timestamp="2025-08-04T04:47:35.456Z" hostname="" tests="6" failures="0" skipped="0" time="13.875" errors="0">
+<testcase name="Gerenciamento de Pessoas › Criar uma nova pessoa física com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="3.252">
 </testcase>
-<testcase name="Gerenciamento de Pessoas › Excluir uma pessoa existente com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="3.218">
+<testcase name="Gerenciamento de Pessoas › Criar uma nova pessoa jurídica com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="1.902">
+</testcase>
+<testcase name="Gerenciamento de Pessoas › Visualizar os detalhes de uma pessoa existente" classname="e2e/features/pessoa.feature.spec.js" time="2.011">
+</testcase>
+<testcase name="Gerenciamento de Pessoas › Editar uma pessoa existente com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="2.838">
+</testcase>
+<testcase name="Gerenciamento de Pessoas › Excluir uma pessoa existente com sucesso" classname="e2e/features/pessoa.feature.spec.js" time="2.446">
+</testcase>
+<testcase name="Gerenciamento de Pessoas › Tentar criar uma pessoa sem o campo &quot;Nome&quot;" classname="e2e/features/pessoa.feature.spec.js" time="1.426">
 </testcase>
 </testsuite>
 </testsuites>

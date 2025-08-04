@@ -34,6 +34,12 @@
       "javadoc": "pode ter o simbolo 'plus', ddi, ddd alem do numero"
     },
     {
+      "fieldName": "telefoneDdi",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "4"
+    },
+    {
       "fieldName": "telefoneDdd",
       "fieldType": "Integer",
       "javadoc": "Caso o contato seja um número de telefone"

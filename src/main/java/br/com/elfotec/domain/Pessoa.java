@@ -113,6 +113,12 @@ public class Pessoa implements Serializable {
     @Column(name = "raca")
     private String raca;
 
+    /**
+     * Data de exclusão lógica - NULL = ativo, valor = excluído
+     */
+    @Column(name = "data_exclusao")
+    private Instant dataExclusao;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -375,6 +381,19 @@ public class Pessoa implements Serializable {
         this.raca = raca;
     }
 
+    public Instant getDataExclusao() {
+        return this.dataExclusao;
+    }
+
+    public Pessoa dataExclusao(Instant dataExclusao) {
+        this.setDataExclusao(dataExclusao);
+        return this;
+    }
+
+    public void setDataExclusao(Instant dataExclusao) {
+        this.dataExclusao = dataExclusao;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -418,6 +437,7 @@ public class Pessoa implements Serializable {
             ", observacoes='" + getObservacoes() + "'" +
             ", naturalidade='" + getNaturalidade() + "'" +
             ", raca='" + getRaca() + "'" +
+            ", dataExclusao='" + getDataExclusao() + "'" +
             "}";
     }
 }

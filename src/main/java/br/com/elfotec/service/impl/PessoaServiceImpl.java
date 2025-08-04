@@ -5,6 +5,7 @@ import br.com.elfotec.repository.PessoaRepository;
 import br.com.elfotec.service.PessoaService;
 import br.com.elfotec.service.dto.PessoaDTO;
 import br.com.elfotec.service.mapper.PessoaMapper;
+import java.time.Instant;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,20 +58,30 @@ public class PessoaServiceImpl implements PessoaService {
     @Override
     @Transactional(readOnly = true)
     public Page<PessoaDTO> findAll(Pageable pageable) {
-        log.debug("Request to get all Pessoas");
-        return pessoaRepository.findAll(pageable).map(pessoaMapper::toDto);
+        log.debug("Request to get all active Pessoas");
+        return pessoaRepository.findAllActive(pageable).map(pessoaMapper::toDto);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<PessoaDTO> findOne(Long id) {
-        log.debug("Request to get Pessoa : {}", id);
-        return pessoaRepository.findById(id).map(pessoaMapper::toDto);
+        log.debug("Request to get active Pessoa : {}", id);
+        return pessoaRepository.findActiveById(id).map(pessoaMapper::toDto);
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Pessoa : {}", id);
-        pessoaRepository.deleteById(id);
+
+        // Exclusão lógica: Marcar como excluído em vez de deletar
+        Optional<Pessoa> pessoaOpt = pessoaRepository.findById(id);
+        if (pessoaOpt.isPresent()) {
+            Pessoa pessoa = pessoaOpt.get();
+            pessoa.setDataExclusao(Instant.now()); // Marca data/hora de exclusão
+            pessoaRepository.save(pessoa); // Salva a alteração
+            log.debug("Pessoa {} marked as deleted with dataExclusao: {}", id, pessoa.getDataExclusao());
+        } else {
+            log.warn("Pessoa with id {} not found for deletion", id);
+        }
     }
 }

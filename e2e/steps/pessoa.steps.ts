@@ -1,8 +1,7 @@
 /**
  * @file Arquivo de implementação dos steps (passos) BDD para a entidade de 'Pessoa'.
  * Este arquivo traduz os cenários escritos em Gherkin (.feature) para código Playwright executável.
- * A arquitetura utiliza mapas de seletores para desacoplar a lógica de teste dos seletores da UI,
- * promovendo manutenibilidade e reutilização.
+ * A arquitetura utiliza mapas de seletores para desacoplar a lógica de teste dos seletores da UI
  */
 
 // --- IMPORTS ---
@@ -18,7 +17,6 @@ import { sortByHighestID } from '../utils/table-helpers';
 
 export const PESSOA_BUTTON_SELECTORS: { [key: string]: string } = {
   'Create a new Pessoa': '[data-cy="entityCreateButton"]',
-  'Save': '[data-cy="entityCreateSaveButton"]',
 };
 
 export const PESSOA_FIELD_SELECTORS: { [key: string]: { selector: string; type: 'input' | 'select' } } = {
@@ -161,22 +159,6 @@ When('eu clico no botão de edição na linha que contém o CPF gerado', async (
   await expect(page.locator('[data-cy="entityCreateSaveButton"]')).toBeVisible({ timeout: 10000 });
 });
 
-/**
- * Preenche um campo específico do formulário com um valor.
- * @param {string} fieldName - O nome do campo a ser preenchido.
- * @param {string} value - O valor a ser inserido no campo.
- */
-When('eu preencho o campo {string} com o valor {string}', async ({ page }, fieldName: string, value: string) => {
-  const fieldConfig = PESSOA_FIELD_SELECTORS[fieldName];
-  if (!fieldConfig) {
-    throw new Error(`Seletor não definido para o campo "${fieldName}".`);
-  }
-  if (fieldConfig.type === 'input') {
-    await page.locator(fieldConfig.selector).fill(value);
-  } else if (fieldConfig.type === 'select') {
-    await page.locator(fieldConfig.selector).selectOption({ label: value });
-  }
-});
 
 /**
  * Clica no botão de exclusão da linha da tabela que contém o CPF gerado no contexto.
@@ -189,18 +171,6 @@ When('eu clico no botão de exclusão na linha que contém o CPF gerado', async 
   const targetRow = page.locator('tbody tr', { hasText: ctx.generatedCpf });
   await targetRow.locator('[data-cy="entityDeleteButton"]').click();
   await expect(page.locator('#jhi-delete-pessoa-heading')).toBeVisible();
-});
-
-/**
- * Clica no botão de confirmação no modal de exclusão e espera a resposta da API.
- * @param {string} buttonText - O texto do botão de confirmação (ex: "Delete").
- */
-When('eu clico no botão de confirmação {string} no modal', async ({ page }, buttonText: string) => {
-  // Combina a espera pela resposta da API com a ação de clique para evitar race conditions.
-  await Promise.all([
-    page.waitForResponse(resp => resp.url().includes('/api/pessoas') && resp.status() === 204, { timeout: 10000 }),
-    page.locator('[data-cy="entityConfirmDeleteButton"]').click(),
-  ]);
 });
 
 // --- STEPS: THEN (ENTÃO) ---
@@ -230,18 +200,6 @@ Then('a tabela de pessoas deve conter uma linha com o nome {string} e o CNPJ ger
   await sortByHighestID(page);
   const targetRow = page.locator('tbody tr', { hasText: ctx.generatedCnpj });
   await expect(targetRow.getByRole('cell', { name, exact: true })).toBeVisible();
-});
-
-/**
- * Verifica se um botão específico está desabilitado.
- * @param {string} buttonName - O nome do botão, conforme mapeado em `PESSOA_BUTTON_SELECTORS`.
- */
-Then('o botão {string} deve estar desabilitado', async ({ page }, buttonName: string) => {
-  const selector = PESSOA_BUTTON_SELECTORS[buttonName];
-  if (!selector) {
-    throw new Error(`Seletor não definido para o botão "${buttonName}".`);
-  }
-  await expect(page.locator(selector)).toBeDisabled();
 });
 
 /**

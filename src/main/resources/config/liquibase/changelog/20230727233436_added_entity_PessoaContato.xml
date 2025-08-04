@@ -32,6 +32,9 @@
             <column name="telefone_numero_completo" type="varchar(255)" remarks="pode ter o simbolo &apos;plus&apos;, ddi, ddd alem do numero">
                 <constraints nullable="true" />
             </column>
+            <column name="telefone_ddi" type="varchar(4)">
+                <constraints nullable="true" />
+            </column>
             <column name="telefone_ddd" type="integer" remarks="Caso o contato seja um número de telefone">
                 <constraints nullable="true" />
             </column>
@@ -83,6 +86,7 @@
             <column name="descricao" type="string"/>
             <column name="contato_digital_ident" type="string"/>
             <column name="telefone_numero_completo" type="string"/>
+            <column name="telefone_ddi" type="string"/>
             <column name="telefone_ddd" type="numeric"/>
             <column name="telefone_numero" type="numeric"/>
             <column name="preferido" type="boolean"/>

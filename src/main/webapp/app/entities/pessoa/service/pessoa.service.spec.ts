@@ -48,6 +48,7 @@ describe('Pessoa Service', () => {
       observacoes: 'AAAAAAA',
       naturalidade: 'AAAAAAA',
       raca: 'AAAAAAA',
+      dataExclusao: currentDate,
     };
   });
 
@@ -57,6 +58,7 @@ describe('Pessoa Service', () => {
         {
           dataRegistro: currentDate.format(DATE_TIME_FORMAT),
           dataNascimento: currentDate.format(DATE_FORMAT),
+          dataExclusao: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -74,6 +76,7 @@ describe('Pessoa Service', () => {
           id: 0,
           dataRegistro: currentDate.format(DATE_TIME_FORMAT),
           dataNascimento: currentDate.format(DATE_FORMAT),
+          dataExclusao: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -82,6 +85,7 @@ describe('Pessoa Service', () => {
         {
           dataRegistro: currentDate,
           dataNascimento: currentDate,
+          dataExclusao: currentDate,
         },
         returnedFromService
       );
@@ -116,6 +120,7 @@ describe('Pessoa Service', () => {
           observacoes: 'BBBBBB',
           naturalidade: 'BBBBBB',
           raca: 'BBBBBB',
+          dataExclusao: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -124,6 +129,7 @@ describe('Pessoa Service', () => {
         {
           dataRegistro: currentDate,
           dataNascimento: currentDate,
+          dataExclusao: currentDate,
         },
         returnedFromService
       );
@@ -150,6 +156,7 @@ describe('Pessoa Service', () => {
           estadoCivil: 'BBBBBB',
           observacoes: 'BBBBBB',
           naturalidade: 'BBBBBB',
+          dataExclusao: currentDate.format(DATE_TIME_FORMAT),
         },
         new Pessoa()
       );
@@ -160,6 +167,7 @@ describe('Pessoa Service', () => {
         {
           dataRegistro: currentDate,
           dataNascimento: currentDate,
+          dataExclusao: currentDate,
         },
         returnedFromService
       );
@@ -194,6 +202,7 @@ describe('Pessoa Service', () => {
           observacoes: 'BBBBBB',
           naturalidade: 'BBBBBB',
           raca: 'BBBBBB',
+          dataExclusao: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -202,6 +211,7 @@ describe('Pessoa Service', () => {
         {
           dataRegistro: currentDate,
           dataNascimento: currentDate,
+          dataExclusao: currentDate,
         },
         returnedFromService
       );
@@ -251,7 +261,7 @@ describe('Pessoa Service', () => {
       });
 
       it('should add only unique Pessoa to an array', () => {
-        const pessoaArray: IPessoa[] = [{ id: 123 }, { id: 456 }, { id: 89723 }];
+        const pessoaArray: IPessoa[] = [{ id: 123 }, { id: 456 }, { id: 42433 }];
         const pessoaCollection: IPessoa[] = [{ id: 123 }];
         expectedResult = service.addPessoaToCollectionIfMissing(pessoaCollection, ...pessoaArray);
         expect(expectedResult).toHaveLength(3);
